@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - 
+      main
 
 jobs:
   build-and-deploy:
@@ -21,7 +22,11 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+        shell: pwsh
+
+      - name: Install Hardhat
+        run: npm install --save-dev hardhat@2.17.3 @nomiclabs/hardhat-ethers@2.2.3
         shell: pwsh
 
       - name: Show environment (debug)
