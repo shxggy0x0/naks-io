@@ -1,0 +1,42 @@
+name: Debug Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Check files
+        run: |
+          Write-Host "Current directory:"
+          pwd
+          Write-Host "Files in directory:"
+          ls
+          Write-Host "Checking package.json:"
+          if (Test-Path "package.json") {
+            Write-Host "package.json exists"
+            Get-Content package.json | Select-Object -First 10
+          } else {
+            Write-Host "package.json NOT FOUND"
+          }
+        shell: pwsh
+
+      - name: Check Node.js
+        run: |
+          Write-Host "Node.js version:"
+          node --version
+          Write-Host "NPM version:"
+          npm --version
+          Write-Host "NPM config:"
+          npm config list
+        shell: pwsh
+
+      - name: Try simple npm install
+        run: |
+          Write-Host "Trying simple npm install..."
+          npm install --dry-run
+        shell: pwsh
