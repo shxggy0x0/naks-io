@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 
-      main
+      - main
 
 jobs:
   build-and-deploy:
@@ -23,21 +22,26 @@ jobs:
 
       - name: Install dependencies
         run: |
+          Write-Host "Installing dependencies..."
           npm install --legacy-peer-deps
+          Write-Host "Installing Hardhat..."
           npm install --save-dev hardhat@2.17.3 @nomiclabs/hardhat-ethers@2.2.3 ethers@5.8.0
         shell: pwsh
 
-      - name: Show environment (debug)
+      - name: Verify installation
         run: |
-          Write-Host "Using RPC: $env:POLYGON_AMOY_RPC"
-          node -v
-          npm -v
-          Write-Host "Checking if Hardhat is installed:"
+          Write-Host "Node version:"
+          node --version
+          Write-Host "NPM version:"
+          npm --version
+          Write-Host "Hardhat version:"
           npx hardhat --version
         shell: pwsh
 
       - name: Compile contracts
-        run: npx hardhat compile
+        run: |
+          Write-Host "Compiling contracts..."
+          npx hardhat compile
         shell: pwsh
 
       - name: Deploy contracts to Amoy
@@ -45,27 +49,25 @@ jobs:
           POLYGON_RPC_URL: ${{ secrets.POLYGON_AMOY_RPC }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         run: |
-          # Create .env using PowerShell
+          Write-Host "Creating .env file..."
           @"
 POLYGON_RPC_URL=$env:POLYGON_RPC_URL
 PRIVATE_KEY=$env:PRIVATE_KEY
 "@ | Out-File -Encoding utf8 .env
 
-          # Run deploy using npx
+          Write-Host "Deploying contracts..."
           npx hardhat run scripts/deploy-with-output.js --network amoy
         shell: pwsh
 
-      - name: Update environment variables
+      - name: Show results
         if: success()
         run: |
           if (Test-Path "deployed-addresses.json") {
-            Write-Host "📄 Deployed contract addresses:"
+            Write-Host "✅ Deployment successful!"
+            Write-Host "Contract addresses:"
             Get-Content "deployed-addresses.json" | Write-Host
-            Write-Host ""
-            Write-Host "🔧 Add these to your .env.local:"
-            $json = Get-Content "deployed-addresses.json" | ConvertFrom-Json
-            Write-Host "PARCEL_NFT_CONTRACT_ADDRESS=$($json.contracts.ParcelNFT)"
-            Write-Host "LAND_REGISTRY_CONTRACT_ADDRESS=$($json.contracts.LandRegistry)"
+          } else {
+            Write-Host "❌ No deployed-addresses.json found"
           }
         shell: pwsh
 
