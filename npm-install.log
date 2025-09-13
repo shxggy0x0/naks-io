@@ -1,0 +1,59 @@
+npm verb cli C:\nvm4w\nodejs\node.exe C:\nvm4w\nodejs\node_modules\npm\bin\npm-cli.js
+npm info using npm@10.2.4
+npm info using node@v20.11.0
+npm verb title npm install
+npm verb argv "install" "--loglevel" "verbose"
+npm verb logfile logs-max:10 dir:C:\Users\sagar\AppData\Local\npm-cache\_logs\2025-09-10T17_18_34_151Z-
+npm verb logfile C:\Users\sagar\AppData\Local\npm-cache\_logs\2025-09-10T17_18_34_151Z-debug-0.log
+npm http fetch GET 200 https://registry.npmjs.org/next 70ms (cache hit)
+npm http fetch GET 200 https://registry.npmjs.org/@opentelemetry%2fapi 366ms (cache miss)
+npm http fetch GET 200 https://registry.npmjs.org/react 137ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/react-dom 161ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/sass 98ms (cache miss)
+npm http fetch GET 200 https://registry.npmjs.org/postcss 122ms (cache hit)
+npm http fetch GET 200 https://registry.npmjs.org/@next%2fswc-linux-x64-musl 251ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/@next%2fswc-linux-arm64-gnu 273ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/@next%2fswc-darwin-x64 297ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/@next%2fswc-linux-x64-gnu 319ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/@next%2fswc-darwin-arm64 384ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/@next%2fswc-win32-arm64-msvc 471ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/@next%2fswc-linux-arm64-musl 487ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/@next%2fswc-win32-ia32-msvc 1283ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/acorn 176ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/glob 51ms (cache hit)
+npm http fetch GET 200 https://registry.npmjs.org/he 101ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/minimatch 75ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/supports-color 85ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/brace-expansion 83ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/node-fetch 60ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/encoding 97ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/commander 11ms (cache hit)
+npm http fetch GET 200 https://registry.npmjs.org/https-proxy-agent 79ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/agent-base 77ms (cache revalidated)
+npm http fetch GET 200 https://registry.npmjs.org/flat 72ms (cache revalidated)
+npm verb stack Error: ENOENT: no such file or directory, rename -> 'C:\Users\sagar\naks.io\node_modules\.bin\.≡ƒÜÿ-IvznUCCk'
+npm verb stack     at Object.rename (node:internal/fs/promises:732:18)
+npm verb stack     at moveFile (C:\Users\sagar\AppData\Local\nvm\v20.11.0\node_modules\npm\node_modules\@npmcli\fs\lib\move-file.js:30:14)
+npm verb stack     at async Promise.allSettled (index 42)
+npm verb stack     at async [reifyPackages] (C:\Users\sagar\AppData\Local\nvm\v20.11.0\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\reify.js:251:11)
+npm verb stack     at async Arborist.reify (C:\Users\sagar\AppData\Local\nvm\v20.11.0\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\reify.js:170:5)
+npm verb stack     at async Install.exec (C:\Users\sagar\AppData\Local\nvm\v20.11.0\node_modules\npm\lib\commands\install.js:152:5)
+npm verb stack     at async module.exports (C:\Users\sagar\AppData\Local\nvm\v20.11.0\node_modules\npm\lib\cli-entry.js:61:5)
+npm verb cwd C:\Users\sagar\naks.io
+npm verb Windows_NT 10.0.26100
+npm verb node v20.11.0
+npm verb npm  v10.2.4
+npm ERR! code ENOENT
+npm ERR! syscall rename
+npm ERR! dest C:\Users\sagar\naks.io\node_modules\.bin\.≡ƒÜÿ-IvznUCCk
+npm ERR! errno -4058
+npm ERR! enoent ENOENT: no such file or directory, rename -> 'C:\Users\sagar\naks.io\node_modules\.bin\.≡ƒÜÿ-IvznUCCk'
+npm ERR! enoent This is related to npm not being able to find a file.
+npm ERR! enoent 
+npm verb exit -4058
+npm verb unfinished npm timer command:install 1757524714879
+npm verb unfinished npm timer reify 1757524714886
+npm verb unfinished npm timer reify:retireShallow 1757524721488
+npm verb code -4058
+
+npm ERR! A complete log of this run can be found in: C:\Users\sagar\AppData\Local\npm-cache\_logs\2025-09-10T17_18_34_151Z-debug-0.log

@@ -1,0 +1,62 @@
+{
+  "name": "naks-io",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:reset": "supabase db reset",
+    "db:push": "supabase db push",
+    "db:generate": "supabase gen types typescript --local > lib/database.types.ts",
+    "test-setup": "node scripts/test-setup.js",
+    "setup": "scripts\\setup.bat"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
+    "@openzeppelin/contracts": "^4.9.3",
+    "@supabase/auth-helpers-nextjs": "^0.8.7",
+    "@supabase/supabase-js": "^2.38.4",
+    "@types/geojson": "^7946.0.10",
+    "autoprefixer": "^10.4.16",
+    "crypto-js": "^4.2.0",
+    "jose": "^5.1.3",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.294.0",
+    "next": "14.0.3",
+    "postcss": "^8.4.32",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.48.2",
+    "react-leaflet": "^4.2.1",
+    "tailwindcss": "^3.3.6",
+    "web3": "^4.3.0",
+    "web3.storage": "^4.5.5",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@types/crypto-js": "^4.2.1",
+    "@types/leaflet": "^1.9.8",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "dotenv": "^17.2.2",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.3",
+    "ethers": "^5.8.0",
+    "hardhat": "^2.17.3",
+    "supabase": "^1.123.4",
+    "typescript": "^5"
+  },
+  "description": "A production-grade prototype that verifies land parcels using Bhoomi/FMB data, stores authoritative proofs, and mints ERC-721 tokens for verified parcels on Polygon blockchain.",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

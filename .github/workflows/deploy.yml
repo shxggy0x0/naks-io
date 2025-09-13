@@ -1,0 +1,72 @@
+name: Compile & Deploy to Polygon Amoy (Windows)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+        shell: pwsh
+
+      - name: Show environment (debug)
+        run: |
+          Write-Host "Using RPC: $env:POLYGON_AMOY_RPC"
+          node -v
+          npm -v
+        shell: pwsh
+
+      - name: Compile contracts
+        run: npx hardhat compile
+        shell: pwsh
+
+      - name: Deploy contracts to Amoy
+        env:
+          POLYGON_RPC_URL: ${{ secrets.POLYGON_AMOY_RPC }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: |
+          # Create .env using PowerShell
+          @"
+POLYGON_RPC_URL=$env:POLYGON_RPC_URL
+PRIVATE_KEY=$env:PRIVATE_KEY
+"@ | Out-File -Encoding utf8 .env
+
+          # Run deploy using npx
+          npx hardhat run scripts/deploy-with-output.js --network amoy
+        shell: pwsh
+
+      - name: Update environment variables
+        if: success()
+        run: |
+          if (Test-Path "deployed-addresses.json") {
+            Write-Host "📄 Deployed contract addresses:"
+            Get-Content "deployed-addresses.json" | Write-Host
+            Write-Host ""
+            Write-Host "🔧 Add these to your .env.local:"
+            $json = Get-Content "deployed-addresses.json" | ConvertFrom-Json
+            Write-Host "PARCEL_NFT_CONTRACT_ADDRESS=$($json.contracts.ParcelNFT)"
+            Write-Host "LAND_REGISTRY_CONTRACT_ADDRESS=$($json.contracts.LandRegistry)"
+          }
+        shell: pwsh
+
+      - name: Upload deployed addresses artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployed-addresses
+          path: deployed-addresses.json
