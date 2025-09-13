@@ -1,0 +1,30 @@
+name: Test Hardhat Installation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-hardhat:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Hardhat only
+        run: |
+          Write-Host "Installing Hardhat..."
+          npm install --save-dev hardhat@2.17.3
+          Write-Host "Hardhat installed successfully!"
+        shell: pwsh
+
+      - name: Test Hardhat
+        run: |
+          Write-Host "Testing Hardhat..."
+          npx hardhat --version
+          Write-Host "Hardhat test successful!"
+        shell: pwsh
