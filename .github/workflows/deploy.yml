@@ -22,11 +22,9 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
-        shell: pwsh
-
-      - name: Install Hardhat
-        run: npm install --save-dev hardhat@2.17.3 @nomiclabs/hardhat-ethers@2.2.3
+        run: |
+          npm install --legacy-peer-deps
+          npm install --save-dev hardhat@2.17.3 @nomiclabs/hardhat-ethers@2.2.3 ethers@5.8.0
         shell: pwsh
 
       - name: Show environment (debug)
@@ -34,6 +32,8 @@ jobs:
           Write-Host "Using RPC: $env:POLYGON_AMOY_RPC"
           node -v
           npm -v
+          Write-Host "Checking if Hardhat is installed:"
+          npx hardhat --version
         shell: pwsh
 
       - name: Compile contracts
